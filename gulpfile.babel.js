@@ -60,14 +60,23 @@ gulp.task('images', () =>
 gulp.task('copy', () =>
   gulp.src([
     'app/*',
-    '!app/*.html',
-    'node_modules/apache-server-configs/dist/.htaccess'
+    '!app/*.html'
+    // 'node_modules/apache-server-configs/dist/.htaccess'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}))
 );
 
+// Copy all files at the root level (app)
+gulp.task('copy:vendor', () =>
+  gulp.src([
+    'app/vendor/*'
+  ], {
+    dot: true
+  }).pipe(gulp.dest('dist/vendor'))
+    .pipe($.size({title: 'copy'}))
+);
 // Compile and automatically prefix stylesheets
 gulp.task('styles', () => {
   const AUTOPREFIXER_BROWSERS = [
@@ -195,7 +204,7 @@ gulp.task('serve:dist', ['default'], () =>
 gulp.task('default', ['clean'], cb =>
   runSequence(
     'styles',
-    ['lint', 'html', 'scripts', 'images', 'copy'],
+    ['lint', 'html', 'scripts', 'images', 'copy', 'copy:vendor'],
     'generate-service-worker',
     cb
   )
