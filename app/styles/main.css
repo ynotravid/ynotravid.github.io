@@ -14,9 +14,11 @@
     flex: 1;
   }
   .HolyGrail-content {
+      /*background-color: #ff0000;*/
     flex: 1;
   }
   .HolyGrail-nav, .HolyGrail-ads {
+      /*background-color: #00ff00;*/
     /* 12em is the width of the columns */
     flex: 0 0 12em;
   }
